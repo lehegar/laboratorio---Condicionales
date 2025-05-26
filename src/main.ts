@@ -1,4 +1,6 @@
-let puntuacion = 1;
+// Mostrar Puntuacion
+
+let puntuacion = 0;
 
 function muestraPuntuacion() {
   const elementoPuntuacionHTML = document.getElementById(
@@ -9,20 +11,30 @@ function muestraPuntuacion() {
   }
 }
 
-muestraPuntuacion();
+document.addEventListener("DOMContentLoaded", function () {
+  muestraPuntuacion();
+  console.log("Puntuacion");
+});
 
-/*
-const MiNombre = "Leticia";
-const nombreOtra = "Sandra";
+// Pedir carta - Aleatoria
 
-const numeroUsuario = 15;
-
-let nombreGanadora;
-
-if (numeroUsuario <= 10) {
-  nombreGanadora = MiNombre;
-} else {
-  nombreGanadora = nombreOtra;
+function dameCarta() {
+  const botonCarta = document.getElementById("cartaAzar") as HTMLButtonElement;
+  if (botonCarta) {
+    botonCarta.addEventListener("click", function () {
+      const numeroAleatorio = Math.floor(Math.random() * 100);
+      console.log(numeroAleatorio);
+    });
+  }
 }
-console.log("Has ganado", nombreGanadora);
-*/
+
+document.addEventListener("DOMContentLoaded", function () {
+  dameCarta();
+  console.log("Puntuacion");
+});
+
+dameCarta();
+
+//Mostrar carta
+
+//

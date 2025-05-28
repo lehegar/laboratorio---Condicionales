@@ -1,3 +1,5 @@
+import "./style.css";
+
 let puntuacion = 0;
 
 function muestraPuntuacion() {
@@ -11,6 +13,7 @@ function muestraPuntuacion() {
 
 document.addEventListener("DOMContentLoaded", function () {
   muestraPuntuacion();
+  dameCarta();
 });
 
 function dameCarta() {
@@ -24,47 +27,68 @@ function dameCarta() {
         numeroAleatorio += 2;
       }
 
-      console.log(numeroAleatorio);
-
       let cartaLocalizacion = "";
+      let valorCarta = 0;
 
       switch (numeroAleatorio) {
         case 1:
           cartaLocalizacion = "cartas/1_as-copas.jpg";
+          valorCarta = 1;
           break;
         case 2:
           cartaLocalizacion = "cartas/2_dos-copas.jpg";
+          valorCarta = 2;
           break;
         case 3:
           cartaLocalizacion = "cartas/3_tres-copas.jpg";
+          valorCarta = 3;
           break;
         case 4:
           cartaLocalizacion = "cartas/4_cuatro-copas.jpg";
+          valorCarta = 4;
           break;
         case 5:
           cartaLocalizacion = "cartas/5_cinco-copas.jpg";
+          valorCarta = 5;
           break;
         case 6:
           cartaLocalizacion = "cartas/6_seis-copas.jpg";
+          valorCarta = 6;
           break;
         case 7:
           cartaLocalizacion = "cartas/7_siete-copas.jpg";
+          valorCarta = 7;
           break;
         case 10:
           cartaLocalizacion = "cartas/10_sota-copas.jpg";
+          valorCarta = 0.5;
           break;
         case 11:
           cartaLocalizacion = "cartas/11_caballo-copas.jpg";
+          valorCarta = 0.5;
           break;
         case 12:
           cartaLocalizacion = "cartas/12_rey-copas.jpg";
+          valorCarta = 0.5;
           break;
         default:
           cartaLocalizacion = "cartas/back.jpg";
           break;
       }
 
-      const imagen = document.getElementById("uno") as HTMLImageElement;
+      puntuacion = puntuacion + valorCarta;
+      muestraPuntuacion();
+
+      console.log(puntuacion);
+
+      const imagenMostrada = document.getElementById(
+        "cartaMostrada"
+      ) as HTMLImageElement;
+      if (imagenMostrada) {
+        imagenMostrada.src = cartaLocalizacion;
+      }
+
+      const imagen = document.getElementById("back") as HTMLImageElement;
       if (imagen) {
         imagen.src = cartaLocalizacion;
       }
@@ -73,7 +97,3 @@ function dameCarta() {
     });
   }
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  dameCarta();
-});

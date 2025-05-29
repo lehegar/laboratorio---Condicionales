@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   muestraPuntuacion();
   dameCarta();
   nuevaPartida();
+  botonMePlanto();
 });
 
 function dameCarta() {
@@ -118,6 +119,12 @@ function nuevaPartida(): void {
       if (imagenMostrada) {
         imagenMostrada.src = cartaReverso;
       }
+      const contenedor = document.getElementById("mensaje") as HTMLDivElement;
+      const mensaje = "";
+      if (contenedor) {
+        contenedor.textContent = mensaje;
+      }
+      reset();
     });
   }
 }
@@ -128,5 +135,29 @@ function gameOver(): void {
     if (boton) {
       boton.disabled = true;
     }
+  }
+}
+
+function reset(): void {
+  const boton = document.getElementById("cartaAzar") as HTMLButtonElement;
+  if (boton) {
+    boton.disabled = false;
+  }
+}
+
+function mePlanto() {
+  if (puntuacion < 4) {
+    const contenedor = document.getElementById("mensaje") as HTMLDivElement;
+    const mensaje = "Has sido muy conservador";
+    if (contenedor) {
+      contenedor.textContent = mensaje;
+    }
+  }
+}
+
+function botonMePlanto() {
+  const boton = document.getElementById("mePlanto") as HTMLButtonElement;
+  if (boton) {
+    boton.addEventListener("click", mePlanto);
   }
 }

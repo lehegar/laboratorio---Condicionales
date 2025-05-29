@@ -78,9 +78,8 @@ function dameCarta() {
       }
 
       puntuacion = puntuacion + valorCarta;
-      muestraPuntuacion();
 
-      console.log(puntuacion);
+      muestraPuntuacion();
 
       const imagenMostrada = document.getElementById(
         "cartaMostrada"
@@ -95,6 +94,8 @@ function dameCarta() {
       }
 
       console.log(`Carta seleccionada: ${cartaLocalizacion}`);
+
+      gameOver();
     });
   }
 }
@@ -118,5 +119,14 @@ function nuevaPartida(): void {
         imagenMostrada.src = cartaReverso;
       }
     });
+  }
+}
+
+function gameOver(): void {
+  if (puntuacion > 7.5) {
+    const boton = document.getElementById("cartaAzar") as HTMLButtonElement;
+    if (boton) {
+      boton.disabled = true;
+    }
   }
 }

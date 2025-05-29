@@ -1,6 +1,7 @@
 import "./style.css";
 
 let puntuacion = 0;
+let cartaLocalizacion = "";
 
 function muestraPuntuacion() {
   const elementoPuntuacionHTML = document.getElementById(
@@ -14,6 +15,7 @@ function muestraPuntuacion() {
 document.addEventListener("DOMContentLoaded", function () {
   muestraPuntuacion();
   dameCarta();
+  nuevaPartida();
 });
 
 function dameCarta() {
@@ -27,7 +29,6 @@ function dameCarta() {
         numeroAleatorio += 2;
       }
 
-      let cartaLocalizacion = "";
       let valorCarta = 0;
 
       switch (numeroAleatorio) {
@@ -94,6 +95,28 @@ function dameCarta() {
       }
 
       console.log(`Carta seleccionada: ${cartaLocalizacion}`);
+    });
+  }
+}
+
+function nuevaPartida(): void {
+  const botonNuevaPartida = document.getElementById(
+    "nuevaPartida"
+  ) as HTMLButtonElement;
+
+  if (botonNuevaPartida) {
+    botonNuevaPartida.addEventListener("click", () => {
+      puntuacion = 0;
+      muestraPuntuacion();
+
+      const cartaReverso = "cartas/back.jpg";
+
+      const imagenMostrada = document.getElementById(
+        "cartaMostrada"
+      ) as HTMLImageElement;
+      if (imagenMostrada) {
+        imagenMostrada.src = cartaReverso;
+      }
     });
   }
 }

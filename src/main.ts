@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
   dameCarta();
   nuevaPartida();
   botonMePlanto();
+  ocultarQueHubieraPasado();
+  botonQueHubieraPasado();
 });
 
 function dameCarta() {
@@ -125,6 +127,7 @@ function nuevaPartida(): void {
         contenedor.textContent = mensaje;
       }
       reset();
+      ocultarQueHubieraPasado();
     });
   }
 }
@@ -176,6 +179,8 @@ function mePlanto() {
   if (botonCarta) {
     botonCarta.disabled = true;
   }
+
+  mostrarqueHubieraPasado();
 }
 
 function botonMePlanto() {
@@ -183,4 +188,109 @@ function botonMePlanto() {
   if (boton) {
     boton.addEventListener("click", mePlanto);
   }
+}
+
+function mostrarqueHubieraPasado(): void {
+  const boton = document.getElementById(
+    "queHubieraPasado"
+  ) as HTMLButtonElement;
+
+  if (boton) {
+    boton.style.display = "inline-block";
+  }
+}
+
+function ocultarQueHubieraPasado(): void {
+  const boton = document.getElementById(
+    "queHubieraPasado"
+  ) as HTMLButtonElement;
+  if (boton) {
+    boton.style.display = "none";
+  }
+}
+
+function botonQueHubieraPasado() {
+  const boton = document.getElementById(
+    "queHubieraPasado"
+  ) as HTMLButtonElement;
+  if (boton) {
+    boton.addEventListener("click", cartaFinal);
+  }
+}
+
+function cartaFinal() {
+  let numeroAleatorio = Math.floor(Math.random() * 10) + 1;
+  console.log(numeroAleatorio);
+
+  if (numeroAleatorio > 7) {
+    numeroAleatorio += 2;
+  }
+
+  let valorCarta = 0;
+
+  switch (numeroAleatorio) {
+    case 1:
+      cartaLocalizacion = "cartas/1_as-copas.jpg";
+      valorCarta = 1;
+      break;
+    case 2:
+      cartaLocalizacion = "cartas/2_dos-copas.jpg";
+      valorCarta = 2;
+      break;
+    case 3:
+      cartaLocalizacion = "cartas/3_tres-copas.jpg";
+      valorCarta = 3;
+      break;
+    case 4:
+      cartaLocalizacion = "cartas/4_cuatro-copas.jpg";
+      valorCarta = 4;
+      break;
+    case 5:
+      cartaLocalizacion = "cartas/5_cinco-copas.jpg";
+      valorCarta = 5;
+      break;
+    case 6:
+      cartaLocalizacion = "cartas/6_seis-copas.jpg";
+      valorCarta = 6;
+      break;
+    case 7:
+      cartaLocalizacion = "cartas/7_siete-copas.jpg";
+      valorCarta = 7;
+      break;
+    case 10:
+      cartaLocalizacion = "cartas/10_sota-copas.jpg";
+      valorCarta = 0.5;
+      break;
+    case 11:
+      cartaLocalizacion = "cartas/11_caballo-copas.jpg";
+      valorCarta = 0.5;
+      break;
+    case 12:
+      cartaLocalizacion = "cartas/12_rey-copas.jpg";
+      valorCarta = 0.5;
+      break;
+    default:
+      cartaLocalizacion = "cartas/back.jpg";
+      break;
+  }
+
+  puntuacion = puntuacion + valorCarta;
+
+  muestraPuntuacion();
+
+  const imagenMostrada = document.getElementById(
+    "cartaMostrada"
+  ) as HTMLImageElement;
+  if (imagenMostrada) {
+    imagenMostrada.src = cartaLocalizacion;
+  }
+
+  const imagen = document.getElementById("back") as HTMLImageElement;
+  if (imagen) {
+    imagen.src = cartaLocalizacion;
+  }
+
+  console.log(`Carta seleccionada: ${cartaLocalizacion}`);
+
+  gameOver();
 }

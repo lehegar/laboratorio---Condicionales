@@ -155,13 +155,13 @@ function mePlanto() {
     if (contenedor) {
       contenedor.textContent = mensaje;
     }
-  } else if (puntuacion > 4 && puntuacion < 5.5) {
+  } else if (puntuacion >= 4 && puntuacion <= 5) {
     const contenedor = document.getElementById("mensaje") as HTMLDivElement;
     const mensaje = "Te ha entrado el canguelo, eh?";
     if (contenedor) {
       contenedor.textContent = mensaje;
     }
-  } else if (puntuacion > 6 && puntuacion < 7) {
+  } else if (puntuacion >= 6 && puntuacion <= 7) {
     const contenedor = document.getElementById("mensaje") as HTMLDivElement;
     const mensaje = "Casi casi..";
     if (contenedor) {

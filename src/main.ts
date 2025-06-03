@@ -94,6 +94,110 @@ const gameOver = () => {
     if (botonHTMLDarCarta instanceof HTMLButtonElement) {
       botonHTMLDarCarta.disabled = true;
     }
+
+    visibleBotonQueHubieraPasado();
+
+    if (botonMePlanto instanceof HTMLButtonElement) {
+      botonMePlanto.disabled = true;
+    }
+  }
+};
+
+// ME PLANTO //
+
+const mePlanto = () => {
+  if (botonHTMLDarCarta instanceof HTMLButtonElement) {
+    botonHTMLDarCarta.disabled = true;
+  }
+
+  const contenedorMensaje = document.getElementById("mensaje");
+  if (
+    contenedorMensaje !== null &&
+    contenedorMensaje !== undefined &&
+    contenedorMensaje instanceof HTMLDivElement
+  ) {
+    if (puntuacion < 4) {
+      contenedorMensaje.textContent = "Has sido muy conservador";
+    } else if (puntuacion < 5) {
+      contenedorMensaje.textContent = "Te ha entrado el canguelo eh?";
+    } else if (puntuacion >= 6 && puntuacion <= 7) {
+      contenedorMensaje.textContent = "Casi casi...";
+    } else if (puntuacion === 7.5) {
+      contenedorMensaje.textContent = "¡ Lo has clavado! ¡Enhorabuena!";
+    }
+
+    visibleBotonQueHubieraPasado();
+  }
+
+  const btnQueHubieraPasado = document.getElementById(
+    "queHubieraPasado"
+  ) as HTMLButtonElement;
+  if (btnQueHubieraPasado instanceof HTMLButtonElement) {
+    btnQueHubieraPasado.addEventListener("click", elementoQueHubieraPasado);
+  }
+};
+
+// NUEVA PARTIDA //
+
+const reset = () => {
+  puntuacion = 0;
+  muestraPuntuacion();
+
+  const elementoImagen = document.getElementById("cartaMostrada");
+  if (elementoImagen instanceof HTMLImageElement) {
+    elementoImagen.src = "cartas/back.jpg";
+  }
+
+  const contenedorMensaje = document.getElementById("mensaje");
+  if (contenedorMensaje instanceof HTMLDivElement) {
+    contenedorMensaje.textContent = "";
+  }
+
+  if (botonHTMLDarCarta instanceof HTMLButtonElement) {
+    botonHTMLDarCarta.disabled = false;
+  }
+
+  if (botonMePlanto instanceof HTMLButtonElement) {
+    botonMePlanto.disabled = false;
+  }
+
+  if (botonMePlanto instanceof HTMLButtonElement) {
+    botonMePlanto.style.display = "";
+  }
+  ocultarBotonQueHubieraPasado();
+};
+
+// QUE HUBIERA PASADO //
+
+const elementoQueHubieraPasado = () => {
+  dameCarta();
+
+  if (botonMePlanto instanceof HTMLButtonElement) {
+    botonMePlanto.disabled = true;
+  }
+
+  if (botonHTMLDarCarta instanceof HTMLButtonElement) {
+    botonHTMLDarCarta.disabled = true;
+  }
+
+  if (botonMePlanto instanceof HTMLButtonElement) {
+    botonMePlanto.disabled = true;
+  }
+
+  if (btnQueHubieraPasado instanceof HTMLButtonElement) {
+    btnQueHubieraPasado.disabled = true;
+  }
+};
+
+const visibleBotonQueHubieraPasado = () => {
+  if (btnQueHubieraPasado instanceof HTMLButtonElement) {
+    btnQueHubieraPasado.style.display = "";
+  }
+};
+
+const ocultarBotonQueHubieraPasado = () => {
+  if (btnQueHubieraPasado instanceof HTMLButtonElement) {
+    btnQueHubieraPasado.style.display = "none";
   }
 };
 
@@ -102,6 +206,7 @@ const gameOver = () => {
 document.addEventListener("DOMContentLoaded", function () {
   muestraPuntuacion();
   dameCarta();
+  reset();
 });
 
 // BOTONES //
@@ -113,4 +218,29 @@ if (
   botonHTMLDarCarta instanceof HTMLButtonElement
 ) {
   botonHTMLDarCarta.addEventListener("click", dameCarta);
+}
+
+const botonMePlanto = document.getElementById("mePlanto");
+if (botonMePlanto !== null && botonMePlanto instanceof HTMLButtonElement) {
+  botonMePlanto.addEventListener("click", mePlanto);
+}
+
+const botonNuevaPartida = document.getElementById("nuevaPartida");
+if (
+  botonNuevaPartida !== null &&
+  botonNuevaPartida instanceof HTMLButtonElement
+) {
+  botonNuevaPartida.addEventListener("click", reset);
+}
+
+const btnQueHubieraPasado = document.getElementById("queHubieraPasado");
+if (
+  btnQueHubieraPasado !== null &&
+  btnQueHubieraPasado instanceof HTMLButtonElement
+) {
+  btnQueHubieraPasado.addEventListener("click", elementoQueHubieraPasado);
+}
+
+if (botonNuevaPartida instanceof HTMLButtonElement) {
+  botonNuevaPartida.addEventListener("click", reset);
 }

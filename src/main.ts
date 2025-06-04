@@ -89,6 +89,8 @@ const sumarPuntuacion = (puntos: number) => {
 
 // GAME OVER //
 
+const contenedorMensaje = document.getElementById("mensaje");
+
 const gameOver = () => {
   if (puntuacion > 7.5) {
     if (botonHTMLDarCarta instanceof HTMLButtonElement) {
@@ -99,6 +101,12 @@ const gameOver = () => {
 
     if (botonMePlanto instanceof HTMLButtonElement) {
       botonMePlanto.disabled = true;
+    }
+  }
+
+  if (contenedorMensaje instanceof HTMLDivElement) {
+    if (puntuacion > 7.5) {
+      contenedorMensaje.textContent = "Te has pasado... 😢";
     }
   }
 };
@@ -241,6 +249,9 @@ if (
   btnQueHubieraPasado.addEventListener("click", elementoQueHubieraPasado);
 }
 
-if (botonNuevaPartida instanceof HTMLButtonElement) {
+if (
+  botonNuevaPartida !== null &&
+  botonNuevaPartida instanceof HTMLButtonElement
+) {
   botonNuevaPartida.addEventListener("click", reset);
 }

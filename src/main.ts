@@ -23,9 +23,10 @@ const dameCarta = () => {
   const urlCarta = dameUrlCarta(numeroCartaReal);
   mostrarCarta(urlCarta);
   const puntosCartas = puntuacionCartas(numeroCartaReal);
-  sumarPuntuacion(puntosCartas);
+  const sumaPuntos = sumarPuntuacion(puntosCartas);
+  actualizarPuntuacion(sumaPuntos);
   muestraPuntuacion();
-  gameOver();
+  gestionPartida();
 };
 
 const numeroAleatorio = () => {
@@ -84,14 +85,18 @@ const mostrarCarta = (url: string) => {
 };
 
 const sumarPuntuacion = (puntos: number) => {
-  puntuacion += puntos;
+  return puntuacion + puntos;
+};
+
+const actualizarPuntuacion = (puntosActualizados: number) => {
+  puntuacion = puntosActualizados;
 };
 
 // GAME OVER //
 
 const contenedorMensaje = document.getElementById("mensaje");
 
-const gameOver = () => {
+const gestionPartida = () => {
   if (puntuacion > 7.5) {
     if (botonHTMLDarCarta instanceof HTMLButtonElement) {
       botonHTMLDarCarta.disabled = true;
@@ -102,40 +107,41 @@ const gameOver = () => {
     if (botonMePlanto instanceof HTMLButtonElement) {
       botonMePlanto.disabled = true;
     }
-  }
 
-  if (contenedorMensaje instanceof HTMLDivElement) {
-    if (puntuacion > 7.5) {
-      contenedorMensaje.textContent = "Te has pasado... 😢";
-    }
+    mostrarMensaje("Te has pasado... 😢");
+  } else if (puntuacion === 7.5) {
+    mostrarMensaje("Has ganado!!!");
   }
 };
 
+const mostrarMensaje = (mensaje: string) => {
+  if (contenedorMensaje instanceof HTMLDivElement) {
+    contenedorMensaje.textContent = mensaje;
+  }
+};
 // ME PLANTO //
+
+const mensajeCuandoMePlanto = () => {
+  if (puntuacion < 4) {
+    return "Has sido muy conservador";
+  } else if (puntuacion < 5) {
+    return "Te ha entrado el canguelo eh?";
+  } else if (puntuacion >= 6 && puntuacion <= 7) {
+    return "Casi casi...";
+  } else if (puntuacion === 7.5) {
+    return "¡ Lo has clavado! ¡Enhorabuena!";
+  } else {
+    return "Error";
+  }
+};
 
 const mePlanto = () => {
   if (botonHTMLDarCarta instanceof HTMLButtonElement) {
     botonHTMLDarCarta.disabled = true;
   }
 
-  const contenedorMensaje = document.getElementById("mensaje");
-  if (
-    contenedorMensaje !== null &&
-    contenedorMensaje !== undefined &&
-    contenedorMensaje instanceof HTMLDivElement
-  ) {
-    if (puntuacion < 4) {
-      contenedorMensaje.textContent = "Has sido muy conservador";
-    } else if (puntuacion < 5) {
-      contenedorMensaje.textContent = "Te ha entrado el canguelo eh?";
-    } else if (puntuacion >= 6 && puntuacion <= 7) {
-      contenedorMensaje.textContent = "Casi casi...";
-    } else if (puntuacion === 7.5) {
-      contenedorMensaje.textContent = "¡ Lo has clavado! ¡Enhorabuena!";
-    }
-
-    visibleBotonQueHubieraPasado();
-  }
+  const mensaje = mensajeCuandoMePlanto();
+  mostrarMensaje(mensaje);
 
   const btnQueHubieraPasado = document.getElementById(
     "queHubieraPasado"

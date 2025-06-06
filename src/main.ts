@@ -143,9 +143,7 @@ const mePlanto = () => {
   const mensaje = mensajeCuandoMePlanto();
   mostrarMensaje(mensaje);
 
-  const btnQueHubieraPasado = document.getElementById(
-    "queHubieraPasado"
-  ) as HTMLButtonElement;
+  const btnQueHubieraPasado = document.getElementById("queHubieraPasado");
   if (btnQueHubieraPasado instanceof HTMLButtonElement) {
     btnQueHubieraPasado.addEventListener("click", elementoQueHubieraPasado);
   }
